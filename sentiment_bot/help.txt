@@ -1,0 +1,13 @@
+#https://cloud.google.com/container-registry/docs/quickstart
+#https://cloud.google.com/container-registry/docs/pushing-and-pulling
+#https://console.cloud.google.com/compute/instances?project=telegrambot-1-215117
+#https://cloud.google.com/compute/docs/containers/deploying-containers
+
+gcloud beta compute ssh telegrambot-1 --container gcr.io/telegrambot-1-215117/tb-1-image
+gcloud builds submit --tag gcr.io/telegrambot-1-215117/tb-1-image .
+
+docker build -t sentiment_bot-1 .
+docker run sentiment_bot-1
+docker tag sentiment_bot-1 gcr.io/telegrambot-1-215117/sentiment_bot-1:latest
+docker push gcr.io/telegrambot-1-215117/sentiment_bot-1:latest
+gcloud beta compute instances create-with-container instance-1 --zone us-central1-a --container-image=gcr.io/telegrambot-1-215117/sentiment_bot-1:latest --machine-type=f1-micro
