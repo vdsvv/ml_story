@@ -2,7 +2,7 @@ from data_parser_x import DataParser
 import random
 
 class DatasetRusTwitter:
-    def __init__(self, vocabulary_size, index_from):
+    def __init__(self, vocabulary_size=None, index_from=None):
         self.path_raw_neg = './data/negative.csv'
         self.path_raw_pos = './data/positive.csv'
         self.path_tss_neg = './data/negative_tss.txt'
@@ -32,7 +32,13 @@ class DatasetRusTwitter:
         random.shuffle(sequences)
         X, Y = list(zip(*sequences))
         return (X, Y), (X, Y)
-
+    
+    def prepareData(self):
+        self.generateTextSequences()
+        self.generateTextTokenSequences()
+        self.generateVocabulary()
+        self.generateDigitTokenSequences()
+        
     def textToDigitTokens(self, text):
         self.__dp.loadVocab(self.path_vocab)
         textTokens = self.__dp.getTextTokenSequence(text)
@@ -40,6 +46,7 @@ class DatasetRusTwitter:
         self.__dp.modifyDigitTokenSequence(digitTokens, self.vocabulary_size, self.index_from)
         return digitTokens
 
+    """
     def getWord2Index(self):
         word2id = self.__dp.getWord2Index()
         if self.index_from != None:
@@ -50,7 +57,8 @@ class DatasetRusTwitter:
         if self.vocabulary_size != None:
             self.__dp
         return word2id
-    
+    """
+
     def generateTextSequences(self):
         self.__dp.getTextSequences(self.path_raw_neg)
         self.__dp.saveTextSequences(self.path_tss_neg)

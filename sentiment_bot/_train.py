@@ -31,5 +31,5 @@ def checkPredictions():
     res = nn.predict('Прекрасная погода сегодня утром')
     print('<<checkPredictions')
 
-#trainNN()
-checkPredictions()
+trainNN()
+#checkPredictions()

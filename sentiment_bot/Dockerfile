@@ -7,4 +7,4 @@ WORKDIR /app
 ADD . /app
 RUN pip install -r requirements.txt
 
-CMD [ "python", "./start.py" ]
+CMD [ "python", "./_start.py" ]
