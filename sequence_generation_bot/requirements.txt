@@ -1,0 +1,7 @@
+numpy<=1.14.5
+PySocks
+python-telegram-bot
+requests
+tensorflow
+h5py
+Keras
